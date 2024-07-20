@@ -25,6 +25,13 @@ const Form = () => {
             data[key] = value;
         });
 
+        // Validate password length
+        const password = data.password;
+        if (password && password.length < 8) {
+            setError('Password must be at least 8 characters long.');
+            return;
+        }
+
         try {
             if (isLogin) {
                 const response = await loginUser(data);
@@ -73,6 +80,8 @@ const Form = () => {
                 <div className='form-items'>
                     <img src="https://kakushin.io/images/logo.png" alt="logo" className="logo" />
 
+                    {error && <div className="error-message">{error}</div>} {/* Show error message if exists */}
+
                     {isLogin ? (
                         <>
                             <div className="form-group">
@@ -83,8 +92,6 @@ const Form = () => {
                                 <label htmlFor="password">Password</label>
                                 <input type="password" id="password" name="password" required />
                             </div>
-
-                            {error && <div className="error-message">{error}</div>} {/* Show error message if exists */}
 
                             <button type="submit">Login</button>
                         </>
@@ -102,8 +109,6 @@ const Form = () => {
                                 <label htmlFor="password">Password</label>
                                 <input type="password" id="password" name="password" required />
                             </div>
-
-                            {error && <div className="error-message">{error}</div>} {/* Show error message if exists */}
 
                             <button type="submit">Sign Up</button>
                         </>

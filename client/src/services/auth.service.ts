@@ -6,7 +6,6 @@ import { ISignUp } from "../interfaces/signup.interface";
 export const loginUser = async (data: ILogin) => {
   try {
     const response = await axios.post(`${API_URL}/auth/login`, data);
-    console.log('Response',response);
     return response;
   } catch (error: any) {
     return error.response.data;
@@ -16,6 +15,7 @@ export const loginUser = async (data: ILogin) => {
 export const signUpUser = async (data: ISignUp) => {
   try {
     const response = await axios.post(`${API_URL}/auth/signup`, data);
+    console.log(response);
     return response;
   } catch (error: any) {
     return error.response;
