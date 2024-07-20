@@ -20,7 +20,8 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
-        getTasks().then(data => {
+        const authToken = localStorage.getItem("token");
+        getTasks(authToken).then((data) => {
             setTasks(data);
             setLoading(false);
         });
@@ -29,7 +30,8 @@ const Dashboard = () => {
     const handleDelete = async (taskId: string | undefined) => {
         try {
             if (!taskId) return;
-            await deleteTask(taskId);
+            const authToken = localStorage.getItem("token");
+            await deleteTask(authToken, taskId);
             setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
         } catch (error) {
             console.error('Error deleting task:', error);

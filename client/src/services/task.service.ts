@@ -2,9 +2,7 @@ import axios from "axios";
 import { API_URL } from "../config/config";
 import { ITask } from "../interfaces/task.interface";
 
-const authToken = localStorage.getItem("token");
-
-export const createTask = async (data: ITask) => {
+export const createTask = async (authToken: string | null, data: ITask) => {
   try {
     const response = await axios.post(`${API_URL}/tasks`, data, {
       headers: {
@@ -17,7 +15,7 @@ export const createTask = async (data: ITask) => {
   }
 };
 
-export const getTasks = async () => {
+export const getTasks = async (authToken: string | null) => {
   try {
     const response = await axios.get(`${API_URL}/tasks`, {
       headers: {
@@ -30,7 +28,7 @@ export const getTasks = async () => {
   }
 };
 
-export const getTask = async (id: string) => {
+export const getTask = async (authToken: string | null, id: string) => {
   try {
     const response = await axios.get(`${API_URL}/tasks/${id}`, {
       headers: {
@@ -43,7 +41,7 @@ export const getTask = async (id: string) => {
   }
 };
 
-export const updateTask = async (id: string, data: ITask) => {
+export const updateTask = async (authToken: string | null, id: string, data: ITask) => {
   try {
     const response = await axios.put(`${API_URL}/tasks/${id}`, data, {
       headers: {
@@ -56,7 +54,7 @@ export const updateTask = async (id: string, data: ITask) => {
   }
 };
 
-export const deleteTask = async (id: string) => {
+export const deleteTask = async (authToken: string | null, id: string) => {
   try {
     const response = await axios.delete(`${API_URL}/tasks/${id}`, {
       headers: {

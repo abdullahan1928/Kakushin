@@ -16,8 +16,8 @@ const EditTask = () => {
 
     useEffect(() => {
         if (!id) return;
-        
-        getTask(id).then((data) => {
+        const authToken = localStorage.getItem('token');
+        getTask(authToken, id).then((data) => {
             console.log(data);
             const formattedDueDate = new Date(data.dueDate).toISOString().split('T')[0];
             setTitle(data.title);
@@ -33,8 +33,8 @@ const EditTask = () => {
         const newTask = { title, description, dueDate, status, priority };
 
         if (!id) return;
-
-        updateTask(id, newTask);
+        const authToken = localStorage.getItem('token');
+        updateTask(authToken, id, newTask);
         navigate('/dashboard');
         setTitle('');
         setDescription('');

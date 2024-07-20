@@ -14,7 +14,8 @@ const NewTask = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         const newTask = { title, description, dueDate, status, priority };
-        createTask(newTask);
+        const authToken = localStorage.getItem('token');
+        createTask(authToken, newTask);
         navigate('/dashboard');
         setTitle('');
         setDescription('');
